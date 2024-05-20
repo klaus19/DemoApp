@@ -1,13 +1,16 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import QuestionsScreen from '../screens/QuestionsScreen';
+import Home from '../screens/Home';
+import Settings from '../screens/Settings';
 import TestScreen from '../screens/TestScreen';
+import QuestionsScreen from '../screens/QuestionsScreen';
 const Stack = createStackNavigator();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="HomeScreen" component={QuestionsScreen} />
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="HomeScreen" component={Home} />
       <Stack.Screen name="TestScreen" component={TestScreen} />
+      <Stack.Screen name="QuestionsScreen" component={QuestionsScreen} />
     </Stack.Navigator>
   );
 };

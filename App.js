@@ -6,13 +6,13 @@ import AppStack from './src/navigation/Navigation';
 
 const App = () => {
   useEffect(() => {
-    SplashScreen.hide(), 2000;
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 2000);
   }, []);
   return (
     <NavigationContainer>
-      <MyTabs>
-        <AppStack />
-      </MyTabs>
+      <MyTabs />
     </NavigationContainer>
   );
 };
