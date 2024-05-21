@@ -1,40 +1,32 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import styles from '../styles/Cardstyle';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
-
-const data = [
-  {
-    id: 1,
-    title: 'Take a Test',
-    image: require('../images/test.png'),
-    screen: 'TestScreen',
-  },
-  {
-    id: 2,
-    title: 'Questions',
-    image: require('../images/questions.png'),
-    screen: 'QuestionsScreen',
-  },
-  {id: 3, title: 'Instagram', image: require('../images/instagram.png')},
-  {id: 4, title: 'Telegram', image: require('../images/telegram.png')},
-];
+import DataSingleton from '../Singletons/DataSingleton';
 
 const Card = ({item, navigation}) => {
   const onPressHandler = () => {
-    navigation.navigate(item.screen);
+    if (item.screen) {
+      navigation.navigate(item.screen);
+    }
   };
   return (
     <TouchableOpacity style={styles.card} onPress={onPressHandler}>
-      <Image source={item.image} style={styles.cardImage} />
+      <View style={styles.cardInner}>
+        <Image source={item.image} style={styles.cardImage} />
+      </View>
       <Text style={styles.cardTitle}>{item.title}</Text>
+      {item.subtitle && (
+        <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
+      )}
     </TouchableOpacity>
   );
 };
 
 function Home() {
   const navigation = useNavigation();
+  const data = DataSingleton.getData();
   return (
     <LinearGradient
       colors={['#4c669f', '#3b5998', '#192f6a']}
@@ -42,12 +34,13 @@ function Home() {
       end={{x: 1, y: 1}}
       style={{flex: 1}}>
       <View style={styles.container}>
-        <Text style={styles.aboveText}>Select an option</Text>
-        <View style={styles.row}>
-          {data.map(item => (
-            <Card key={item.id} item={item} navigation={navigation} />
-          ))}
-        </View>
+        <FlatList
+          data={data}
+          renderItem={({item}) => <Card item={item} navigation={navigation} />}
+          keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          contentContainerStyle={styles.listContainer}
+        />
       </View>
     </LinearGradient>
   );
