@@ -11,8 +11,11 @@ export default function MyTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'green',
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'black',
+        tabBarStyle: {
+          backgroundColor: 'tomato',
+        },
       }}>
       <Tab.Screen name="Home" component={AppStack} />
       <Tab.Screen name="Play" component={Play} />
