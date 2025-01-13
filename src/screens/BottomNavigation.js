@@ -19,7 +19,7 @@ export default function MyTabs() {
       }}>
       <Tab.Screen name="Home" component={AppStack} />
       <Tab.Screen name="Play" component={Play} />
-      <Tab.Screen name="Flashing" component={Flash} />
+      <Tab.Screen name="Cards" component={Flash} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
